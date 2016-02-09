@@ -1,14 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   Component,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import styles from '../styles';
 
 export default class KeyValuePair extends Component {
   render() {
@@ -20,13 +16,3 @@ export default class KeyValuePair extends Component {
     );
   }
 }
-
-var styles = StyleSheet.create({
-  row: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  label: {
-    fontWeight: 'bold'
-  }
-})

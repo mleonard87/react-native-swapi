@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -15,6 +10,7 @@ import React, {
 } from 'react-native';
 import LoadingView from './LoadingView';
 import KeyValuePair from './KeyValuePair';
+import styles from '../styles';
 
 export default class PlanetsList extends Component {
   constructor(props) {
@@ -50,9 +46,7 @@ export default class PlanetsList extends Component {
   render() {
     if (this.props.planets.length !== this.state.planets.length) {
       return (
-        <View>
-          <ProgressBarAndroid styleAttr='Horizontal' />
-        </View>
+        <LoadingView />
       );
     }
 
@@ -68,7 +62,7 @@ export default class PlanetsList extends Component {
 
   renderPlanet = (planet) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.listItem}>
         <Text
           key={planet.name}
           style={styles.title}
@@ -82,14 +76,3 @@ export default class PlanetsList extends Component {
     );
   };
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8
-  }
-})

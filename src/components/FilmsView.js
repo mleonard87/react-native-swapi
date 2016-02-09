@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -15,6 +10,7 @@ import React, {
 } from 'react-native';
 import LoadingView from './LoadingView';
 import SWAPIConfig from '../config/swapi';
+import styles from '../styles';
 
 var REQUEST_URL = SWAPIConfig.baseUrl + SWAPIConfig.filmsEndpoint;
 
@@ -63,7 +59,11 @@ export default class FilmsView extends Component {
 
     return (
       <View>
-        <ToolbarAndroid style={styles.toolbar} title='Films' />
+        <ToolbarAndroid
+          style={styles.toolbar}
+          title='Films'
+          titleColor='#ffe700'
+          />
         {getContent()}
       </View>
     );
@@ -71,13 +71,13 @@ export default class FilmsView extends Component {
 
   renderFilm = (film) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.listItem}>
         <Text
           style={styles.title}
           onPress={() => {
             this.props.navigator.push({
               name: 'film-detail',
-              title: film.title, 
+              title: film.title,
               dataUrl: film.url
             });
           }}
@@ -88,20 +88,3 @@ export default class FilmsView extends Component {
     );
   };
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center'
-  },
-  toolbar: {
-    height: 56,
-    backgroundColor: '#e9eaed',
-    marginBottom: 0
-  }
-})

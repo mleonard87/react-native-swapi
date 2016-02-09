@@ -1,4 +1,3 @@
-'use strict';
 import React, {
   Component,
   StyleSheet,
@@ -7,7 +6,6 @@ import React, {
   TouchableOpacity,
   Animated,
 } from 'react-native';
-
 
 class PlanetDetailTabBar extends Component {
   constructor () {
@@ -21,7 +19,7 @@ class PlanetDetailTabBar extends Component {
 
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={styles.tab}>
-        <Text>{name}</Text>
+        <Text style={styles.tabLabel}>{name}</Text>
       </TouchableOpacity>
     );
   };
@@ -57,7 +55,7 @@ class PlanetDetailTabBar extends Component {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 3,
-      backgroundColor: '#3b5998',
+      backgroundColor: '#ffe700',
       bottom: 0,
     };
 
@@ -86,6 +84,9 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10,
   },
+  tabLabel: {
+    color: '#ffe700',
+  },
   tabs: {
     height: 45,
     flexDirection: 'row',
@@ -95,6 +96,7 @@ var styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderBottomColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: '#000',
   },
   icon: {
     width: 30,

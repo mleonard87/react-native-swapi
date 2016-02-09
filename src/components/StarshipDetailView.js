@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -10,7 +5,6 @@ import React, {
   StyleSheet,
   Text,
   ToolbarAndroid,
-  ScrollView,
   Navigator,
   View
 } from 'react-native';
@@ -20,6 +14,7 @@ import KeyValuePair from './KeyValuePair';
 import FilmsList from './FilmsList';
 import PeopleList from './PeopleList';
 import SWAPITabBar from './SWAPITabBar';
+import styles from '../styles';
 
 export default class StarshipDetailView extends Component {
   constructor(props) {
@@ -51,77 +46,67 @@ export default class StarshipDetailView extends Component {
         var starship = this.state.starship;
 
         return (
-          <ScrollableTabView initialPage={0} renderTabBar={() => <SWAPITabBar />}>
-            <ScrollView tabLabel='Overview'>
-              <KeyValuePair label='Model' value={starship.model} />
-              <KeyValuePair label='Manufacturer' value={starship.manufacturer} />
-              <KeyValuePair label='Cost in Credits' value={starship.cost_in_credits} />
-              <KeyValuePair label='Length' value={starship.length} />
-              <KeyValuePair label='Max. Atmosphering Speed' value={starship.max_atmosphering_speed} />
-              <KeyValuePair label='Crew' value={starship.crew} />
-              <KeyValuePair label='Passengers' value={starship.passenger} />
-              <KeyValuePair label='Cargo Capacity' value={starship.cargo_capacity} />
-              <KeyValuePair label='Consumables' value={starship.consumables} />
-              <KeyValuePair label='Hyperdrive Rating' value={starship.hyperdrive_rating} />
-              <KeyValuePair label='MGLT' value={starship.MGLT} />
-              <KeyValuePair label='Starship Class' value={starship.starship_class} />
-            </ScrollView>
-            <ScrollView tabLabel='Pilots'>
-              <PeopleList
-                people={starship.pilots}
-                onPress={(title, dataUrl) => {
-                  this.props.navigator.push({
-                    name: 'person-detail',
-                    title: title,
-                    dataUrl: dataUrl
-                  })
-                }}
-                />
-            </ScrollView>
-            <ScrollView tabLabel='Films'>
-              <FilmsList
-                films={starship.films}
-                onPress={(title, dataUrl) => {
-                  this.props.navigator.push({
-                    name: 'film-detail',
-                    title: title,
-                    dataUrl: dataUrl
-                  })
-                }}
-                />
-            </ScrollView>
-          </ScrollableTabView>
+          <View style={styles.container}>
+            <ScrollableTabView initialPage={0} renderTabBar={() => <SWAPITabBar />}>
+              <View tabLabel='Overview'>
+                <KeyValuePair label='Model' value={starship.model} />
+                <KeyValuePair label='Manufacturer' value={starship.manufacturer} />
+                <KeyValuePair label='Cost in Credits' value={starship.cost_in_credits} />
+                <KeyValuePair label='Length' value={starship.length} />
+                <KeyValuePair label='Max. Atmosphering Speed' value={starship.max_atmosphering_speed} />
+                <KeyValuePair label='Crew' value={starship.crew} />
+                <KeyValuePair label='Passengers' value={starship.passenger} />
+                <KeyValuePair label='Cargo Capacity' value={starship.cargo_capacity} />
+                <KeyValuePair label='Consumables' value={starship.consumables} />
+                <KeyValuePair label='Hyperdrive Rating' value={starship.hyperdrive_rating} />
+                <KeyValuePair label='MGLT' value={starship.MGLT} />
+                <KeyValuePair label='Starship Class' value={starship.starship_class} />
+              </View>
+              <View tabLabel='Pilots'>
+                <PeopleList
+                  people={starship.pilots}
+                  onPress={(title, dataUrl) => {
+                    this.props.navigator.push({
+                      name: 'person-detail',
+                      title: title,
+                      dataUrl: dataUrl
+                    })
+                  }}
+                  />
+              </View>
+              <View tabLabel='Films'>
+                <FilmsList
+                  films={starship.films}
+                  onPress={(title, dataUrl) => {
+                    this.props.navigator.push({
+                      name: 'film-detail',
+                      title: title,
+                      dataUrl: dataUrl
+                    })
+                  }}
+                  />
+              </View>
+            </ScrollableTabView>
+          </View>
         );
       } else {
         return (
-          <LoadingView />
+          <View>
+            <LoadingView />
+          </View>
         );
       }
     }
 
     return (
       <View style={styles.container}>
-        <ToolbarAndroid style={styles.toolbar} title={this.props.title} />
+        <ToolbarAndroid
+          style={styles.toolbar}
+          title={this.props.title}
+          titleColor='#ffe700'
+          />
         {getContent()}
       </View>
     );
   }
-
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center'
-  },
-  toolbar: {
-    height: 56,
-    backgroundColor: '#e9eaed',
-    marginBottom: 0
-  }
-})

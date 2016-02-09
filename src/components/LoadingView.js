@@ -13,17 +13,23 @@ import React, {
 export default class LoadingView extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <ProgressBarAndroid />
+      <View style={styles.loadingContainer}>
+        <ProgressBarAndroid styleAttr='Horizontal' style={styles.progressBar} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  loadingContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    padding: 0,
+    margin: 0,
+  },
+  progressBar: {
+    marginTop: -7,
+    padding: 0,
+    color: '#ffe700',
   }
 });

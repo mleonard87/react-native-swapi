@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -10,7 +5,6 @@ import React, {
   StyleSheet,
   Text,
   ToolbarAndroid,
-  ScrollView,
   View
 } from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -19,6 +13,7 @@ import KeyValuePair from './KeyValuePair';
 import FilmsList from './FilmsList';
 import PeopleList from './PeopleList';
 import SWAPITabBar from './SWAPITabBar';
+import styles from '../styles';
 
 export default class PlanetDetailView extends Component {
   constructor(props) {
@@ -50,54 +45,62 @@ export default class PlanetDetailView extends Component {
         var planet = this.state.planet;
 
         return (
-          <ScrollableTabView initialPage={0} renderTabBar={() => <SWAPITabBar />}>
-            <ScrollView tabLabel='Overview'>
-              <KeyValuePair label='Rotation Period' value={planet.rotation_period} />
-              <KeyValuePair label='Orbital Period' value={planet.orbital_period} />
-              <KeyValuePair label='Diameter' value={planet.diameter} />
-              <KeyValuePair label='Climate' value={planet.climate} />
-              <KeyValuePair label='Gravity' value={planet.gravity} />
-              <KeyValuePair label='Terrain' value={planet.terrain} />
-              <KeyValuePair label='Surface Water' value={planet.surface_water} />
-              <KeyValuePair label='Population' value={planet.population} />
-            </ScrollView>
-            <ScrollView tabLabel='Residents'>
-              <PeopleList
-                people={planet.residents}
-                onPress={(title, dataUrl) => {
-                  this.props.navigator.push({
-                    name: 'person-detail',
-                    title: title,
-                    dataUrl: dataUrl
-                  })
-                }}
-                />
-            </ScrollView>
-            <ScrollView tabLabel='Films'>
-              <FilmsList
-                films={planet.films}
-                onPress={(title, dataUrl) => {
-                  this.props.navigator.push({
-                    name: 'film-detail',
-                    title: title,
-                    dataUrl: dataUrl
-                  })
-                }}
-                />
-            </ScrollView>
-          </ScrollableTabView>
+          <View style={styles.container}>
+            <ScrollableTabView initialPage={0} renderTabBar={() => <SWAPITabBar />}>
+              <View tabLabel='Overview'>
+                <KeyValuePair label='Rotation Period' value={planet.rotation_period} />
+                <KeyValuePair label='Orbital Period' value={planet.orbital_period} />
+                <KeyValuePair label='Diameter' value={planet.diameter} />
+                <KeyValuePair label='Climate' value={planet.climate} />
+                <KeyValuePair label='Gravity' value={planet.gravity} />
+                <KeyValuePair label='Terrain' value={planet.terrain} />
+                <KeyValuePair label='Surface Water' value={planet.surface_water} />
+                <KeyValuePair label='Population' value={planet.population} />
+              </View>
+              <View tabLabel='Residents'>
+                <PeopleList
+                  people={planet.residents}
+                  onPress={(title, dataUrl) => {
+                    this.props.navigator.push({
+                      name: 'person-detail',
+                      title: title,
+                      dataUrl: dataUrl
+                    })
+                  }}
+                  />
+              </View>
+              <View tabLabel='Films'>
+                <FilmsList
+                  films={planet.films}
+                  onPress={(title, dataUrl) => {
+                    this.props.navigator.push({
+                      name: 'film-detail',
+                      title: title,
+                      dataUrl: dataUrl
+                    })
+                  }}
+                  />
+              </View>
+            </ScrollableTabView>
+          </View>
         );
       } else {
         return (
-          <LoadingView />
+          <View>
+            <LoadingView />
+          </View>
         );
       }
     };
 
     return (
       <View style={styles.container}>
-        <ToolbarAndroid style={styles.toolbar} title={this.props.title} />
-        {getContent()}
+        <ToolbarAndroid
+          style={styles.toolbar}
+          title={this.props.title}
+          titleColor='#ffe700'
+          />
+          {getContent()}
       </View>
     );
   }
@@ -110,20 +113,3 @@ export default class PlanetDetailView extends Component {
     });
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center'
-  },
-  toolbar: {
-    height: 56,
-    backgroundColor: '#e9eaed',
-    marginBottom: 0
-  }
-})

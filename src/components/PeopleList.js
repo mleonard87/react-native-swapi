@@ -15,6 +15,7 @@ import React, {
 } from 'react-native';
 import LoadingView from './LoadingView';
 import KeyValuePair from './KeyValuePair';
+import styles from '../styles';
 
 export default class PeopleList extends Component {
   constructor(props) {
@@ -50,9 +51,7 @@ export default class PeopleList extends Component {
   render() {
     if (this.props.people.length !== this.state.people.length) {
       return (
-        <View>
-          <ProgressBarAndroid styleAttr='Horizontal' />
-        </View>
+        <LoadingView />
       );
     }
 
@@ -68,7 +67,7 @@ export default class PeopleList extends Component {
 
   renderPerson = (person) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.listItem}>
         <Text
           key={person.name}
           style={styles.title}
@@ -82,14 +81,3 @@ export default class PeopleList extends Component {
     );
   };
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8
-  }
-})

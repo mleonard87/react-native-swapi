@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -13,24 +8,29 @@ import React, {
   View,
   Navigator
 } from 'react-native';
+import corestyles from '../styles';
 
 export default class HomeView extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <ToolbarAndroid style={styles.toolbar} title='Star Wars API' />
+      <View style={corestyles.container}>
+        <ToolbarAndroid
+          style={corestyles.toolbar}
+          title='Star Wars API'
+          titleColor='#ffe700'
+          />
         <View style={styles.row}>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
                 this.props.navigator.push({name: 'planets'})
               }}
               >
-                Planets
-              </Text>
+              Planets
+            </Text>
           </View>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
@@ -42,7 +42,7 @@ export default class HomeView extends Component {
           </View>
         </View>
         <View style={styles.row}>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
@@ -52,7 +52,7 @@ export default class HomeView extends Component {
               Vehicles
             </Text>
           </View>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
@@ -64,7 +64,7 @@ export default class HomeView extends Component {
           </View>
         </View>
         <View style={styles.row}>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
@@ -74,7 +74,7 @@ export default class HomeView extends Component {
               Films
             </Text>
           </View>
-          <View>
+          <View style={styles.tile}>
             <Text
               style={styles.title}
               onPress={() => {
@@ -90,24 +90,21 @@ export default class HomeView extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#F5FCFF'
-  },
+var styles = StyleSheet.create({
   row: {
     flex: 1,
-    justifyContent: 'space-around',
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  tile: {
+    flex: 1,
+    padding: 5,
   },
   title: {
+    flex: 1,
+    backgroundColor: '#000',
+    color: '#ffe700',
+    fontWeight: 'bold',
     fontSize: 20,
-    borderWidth: 1
-  },
-  toolbar: {
-    height: 56,
-    backgroundColor: '#e9eaed',
-    marginBottom: 0
+    textAlign: 'center'
   }
 });

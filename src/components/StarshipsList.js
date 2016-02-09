@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
 import React, {
   AppRegistry,
   Component,
@@ -15,6 +10,7 @@ import React, {
 } from 'react-native';
 import LoadingView from './LoadingView';
 import KeyValuePair from './KeyValuePair';
+import styles from '../styles';
 
 export default class StarshipsList extends Component {
   constructor(props) {
@@ -50,9 +46,7 @@ export default class StarshipsList extends Component {
   render() {
     if (this.props.starships.length !== this.state.starships.length) {
       return (
-        <View>
-          <ProgressBarAndroid styleAttr='Horizontal' />
-        </View>
+        <LoadingView />
       );
     }
 
@@ -68,7 +62,7 @@ export default class StarshipsList extends Component {
 
   renderStarship = (starship) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.listItem}>
         <Text
           key={starship.name}
           style={styles.title}
@@ -83,14 +77,3 @@ export default class StarshipsList extends Component {
   };
 
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8
-  }
-})
